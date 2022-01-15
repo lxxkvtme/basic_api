@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 
 const Dashboard = () => {
@@ -28,10 +28,8 @@ const Dashboard = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleDetail = (param) => {
-    redirect("/detail/" + param, {
-      userId: id,
-    });
+  const handleDetail = (id) => {
+    redirect("/detail/" + id);
   };
 
   console.log("list", list);
@@ -57,9 +55,7 @@ const Dashboard = () => {
                 </td>
                 <td>{user.email}</td>
                 <td>
-                  <button onClick={handleDetail(user.id)} detailList={user}>
-                    Detail
-                  </button>
+                  <button onClick={() => handleDetail(user.id)}>Detail</button>
                 </td>
               </tr>
             ))}
